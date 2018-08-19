@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Repositories
 {
-    public class BlogRepository : BaseRepository
+    public class BlogRepository : BaseRepository, IBlogRepository
     {
         public BlogRepository(string connectionString, IRepositoryContextFactory contextFactory) : base(connectionString, contextFactory) { }
 
