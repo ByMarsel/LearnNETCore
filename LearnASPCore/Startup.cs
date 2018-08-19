@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.DataProtection;
 
 namespace LearnASPCore
 {
@@ -27,6 +28,7 @@ namespace LearnASPCore
             services.AddMvc();
             services.AddScoped<IRepositoryContextFactory, RepositoryContextFactory>();
             services.AddScoped<BlogRepository>(provider => new BlogRepository(Configuration.GetConnectionString("DefaultConnection"), provider.GetService<IRepositoryContextFactory>()));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,9 +40,16 @@ namespace LearnASPCore
             }
 
             app.UseStaticFiles();
-            app.UseMvc(); 
+            app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "DefaultApi",
+                    template: "api/{controller}/{action}");
+            });
+
         }
 
-       
+
     }
 }
