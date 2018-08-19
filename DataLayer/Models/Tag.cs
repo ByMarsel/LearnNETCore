@@ -8,9 +8,9 @@ namespace DataLayer.Models
     {
         public Guid TagId { get;  }
         public Guid PostId { get; }
-        public Guid TagName { get; }
+        public string TagName { get; }
 
-        public Tag(Guid tagId, Guid postId, Guid tagName)
+        public Tag(Guid tagId, Guid postId, string tagName)
         {
             TagId = tagId;
             PostId = postId;
